@@ -28,7 +28,7 @@ class AddTaskScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                task.name == null ? 'Add Task' : "Edit Task",
+                task == null ? 'Add Task' : "Edit Task",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -37,19 +37,20 @@ class AddTaskScreen extends StatelessWidget {
               ),
               TextField(
                 autofocus: true,
-                textAlign:
-                    task.name == null ? TextAlign.center : TextAlign.left,
-                controller: TextEditingController(
-                    text: task.name == null ? '' : task.name),
+                textAlign: task == null ? TextAlign.center : TextAlign.left,
+                controller:
+                    TextEditingController(text: task == null ? '' : task.name),
                 onChanged: (newValue) {
                   newTaskTitle = newValue;
                 },
                 onSubmitted: (newValue) {
                   newTaskTitle = newValue;
                   if (task == null) {
-                    Provider.of<TaskData>(context).addTask(newTaskTitle);
+                    Provider.of<TaskData>(context, listen: false)
+                        .addTask(newTaskTitle);
                   } else {
-                    Provider.of<TaskData>(context).editTask(task, newTaskTitle);
+                    Provider.of<TaskData>(context, listen: false)
+                        .editTask(task, newTaskTitle);
                   }
 
                   Navigator.pop(context);
@@ -61,15 +62,17 @@ class AddTaskScreen extends StatelessWidget {
               FlatButton(
                 onPressed: () {
                   if (task == null) {
-                    Provider.of<TaskData>(context).addTask(newTaskTitle);
+                    Provider.of<TaskData>(context, listen: false)
+                        .addTask(newTaskTitle);
                   } else {
-                    Provider.of<TaskData>(context).editTask(task, newTaskTitle);
+                    Provider.of<TaskData>(context, listen: false)
+                        .editTask(task, newTaskTitle);
                   }
 
                   Navigator.pop(context);
                 },
                 child: Text(
-                  task.name == "" ? 'Add' : "Edit",
+                  task == null ? 'Add' : "Edit",
                   style: TextStyle(
                     color: Colors.white,
                   ),

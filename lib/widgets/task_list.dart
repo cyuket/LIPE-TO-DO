@@ -15,11 +15,11 @@ class TaskList extends StatelessWidget {
               title: taskData.tasks[index].name,
               isChecked: taskData.tasks[index].isDone,
               checkboxCallback: (bool newValue) {
-                Provider.of<TaskData>(context)
+                Provider.of<TaskData>(context, listen: false)
                     .toggleDone(taskData.tasks[index]);
               },
               deleteTask: () {
-                Provider.of<TaskData>(context).deleteTask(index);
+                Provider.of<TaskData>(context, listen: false).deleteTask(index);
               },
               editTask: () {
                 showModalBottomSheet(

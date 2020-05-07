@@ -14,11 +14,11 @@ class TaskData extends ChangeNotifier {
 
   int get completedTask {
     int number = 0;
-    _tasks.map((e) {
-      if (e.isDone) {
+    for (var item in _tasks) {
+      if (item.isDone) {
         number++;
       }
-    });
+    }
     return number;
   }
 
